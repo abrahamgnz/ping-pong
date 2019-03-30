@@ -1,0 +1,255 @@
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:4
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:4
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:4
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+Migrating to CreateUsers (1)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar NOT NULL, "last_name" varchar NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/001_create_users.rb:5
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/migrate/001_create_users.rb:5
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "1"]]
+  ↳ bin/rails:4
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-12 01:03:16.354703"], ["updated_at", "2018-11-12 01:03:16.354703"]]
+  ↳ bin/rails:4
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:4
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "geoffrey@arcusfi.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Geoffrey"], ["last_name", "Roguelon"], ["email", "geoffrey@arcusfi.com"], ["password_digest", "$2a$10$I/ajMQ29K3e0sarl.509O.EE4BFRjWF9MAv2UaGf2HD3B6k00tmNS"], ["created_at", "2018-11-12 01:07:12.791912"], ["updated_at", "2018-11-12 01:07:12.791912"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "geoffrey@arcusfi.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:26:30 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ .gems/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]", "user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:7
+Completed 422 Unprocessable Entity in 14ms (Views: 0.8ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:26:46 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]", "user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com"}}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:7
+#<ActiveModel::Errors:0x00007f83e02585d0 @base=#<User id: nil, first_name: "John", last_name: "Smith", email: "john.smith@email.com", password_digest: nil, created_at: nil, updated_at: nil>, @messages={:password=>["can't be blank"]}, @details={:password=>[{:error=>:blank}]}>
+Completed 422 Unprocessable Entity in 20ms (Views: 0.2ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:27:16 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]", "user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+#<ActiveModel::Errors:0x00007f83df4322d0 @base=#<User id: nil, first_name: "John", last_name: "Smith", email: "john.smith@email.com", password_digest: nil, created_at: nil, updated_at: nil>, @messages={:password=>["can't be blank"]}, @details={:password=>[{:error=>:blank}]}>
+Completed 422 Unprocessable Entity in 13ms (Views: 0.2ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:28:12 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "John"], ["last_name", "Smith"], ["email", "john.smith@email.com"], ["password_digest", "$2a$10$NEOwV.3B5LZvAxVRWJdi4uiO/8J16ztSgaKeaydZjwf6T/kocxywG"], ["created_at", "2018-11-12 01:28:12.448013"], ["updated_at", "2018-11-12 01:28:12.448013"]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 201 Created in 74ms (Views: 0.2ms | ActiveRecord: 2.6ms)
+
+
+  [1m[36mUser Destroy (2.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:30:43 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ .gems/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "John"], ["last_name", "Smith"], ["email", "john.smith@email.com"], ["password_digest", "$2a$10$h8P4but0skDG9JgxDjZ.kes1Xz0M7KWdOmeFwSn2VjefdahSrO/kO"], ["created_at", "2018-11-12 01:30:43.805563"], ["updated_at", "2018-11-12 01:30:43.805563"]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 201 Created in 79ms (Views: 0.3ms | ActiveRecord: 2.5ms)
+
+
+  [1m[36mUser Destroy (2.5ms)[0m  [1m[31mDELETE FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:30:56 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "John"], ["last_name", "Smith"], ["email", "john.smith@email.com"], ["password_digest", "$2a$10$XQOz8asBZfVuCQduI64OnuhsKJ5BFFoV7Og/RSrMPrtjQNvdjiBr6"], ["created_at", "2018-11-12 01:30:56.138669"], ["updated_at", "2018-11-12 01:30:56.138669"]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 201 Created in 65ms (Views: 0.2ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:30:59 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 422 Unprocessable Entity in 63ms (Views: 0.1ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mUser Destroy (1.7ms)[0m  [1m[31mDELETE FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:31:04 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "John"], ["last_name", "Smith"], ["email", "john.smith@email.com"], ["password_digest", "$2a$10$pyrGjMc7kQW0WxKoSnqGje0mZSXencJ9NnBcib/PoOe6JhcGMJyci"], ["created_at", "2018-11-12 01:31:04.431629"], ["updated_at", "2018-11-12 01:31:04.431629"]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 201 Created in 65ms (Views: 0.3ms | ActiveRecord: 1.7ms)
+
+
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:33:30 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"[FILTERED]"}}
+<ActionController::Parameters {"first_name"=>"John", "last_name"=>"Smith", "email"=>"john.smith@email.com", "password"=>"HelloWorld!"} permitted: true>
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "john.smith@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 422 Unprocessable Entity in 65ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:33:56 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:18:in `user_params'
+app/controllers/users_controller.rb:5:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-11-11 20:34:14 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>""}}
+<ActionController::Parameters {"email"=>""} permitted: true>
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/users_controller.rb:8
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/user" for 127.0.0.1 at 2018-11-12 09:25:06 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/user"):
+  
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:38:in `call_app'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:26:in `block in call'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:71:in `block in tagged'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:28:in `tagged'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:71:in `tagged'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:26:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/request_id.rb:27:in `call'
+.gems/gems/rack-2.0.6/lib/rack/runtime.rb:22:in `call'
+.gems/gems/activesupport-5.2.1/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/executor.rb:14:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/static.rb:127:in `call'
+.gems/gems/rack-2.0.6/lib/rack/sendfile.rb:111:in `call'
+.gems/gems/railties-5.2.1/lib/rails/engine.rb:524:in `call'
+.gems/gems/puma-3.12.0/lib/puma/configuration.rb:225:in `call'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:658:in `handle_request'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:472:in `process_client'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:332:in `block in run'
+.gems/gems/puma-3.12.0/lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/user" for 127.0.0.1 at 2018-11-12 09:25:09 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/user"):
+  
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:38:in `call_app'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:26:in `block in call'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:71:in `block in tagged'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:28:in `tagged'
+.gems/gems/activesupport-5.2.1/lib/active_support/tagged_logging.rb:71:in `tagged'
+.gems/gems/railties-5.2.1/lib/rails/rack/logger.rb:26:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/request_id.rb:27:in `call'
+.gems/gems/rack-2.0.6/lib/rack/runtime.rb:22:in `call'
+.gems/gems/activesupport-5.2.1/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/executor.rb:14:in `call'
+.gems/gems/actionpack-5.2.1/lib/action_dispatch/middleware/static.rb:127:in `call'
+.gems/gems/rack-2.0.6/lib/rack/sendfile.rb:111:in `call'
+.gems/gems/railties-5.2.1/lib/rails/engine.rb:524:in `call'
+.gems/gems/puma-3.12.0/lib/puma/configuration.rb:225:in `call'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:658:in `handle_request'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:472:in `process_client'
+.gems/gems/puma-3.12.0/lib/puma/server.rb:332:in `block in run'
+.gems/gems/puma-3.12.0/lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2018-11-12 09:25:19 -0500
+Processing by UsersController#show as JSON
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:39
+Completed 200 OK in 22ms (Views: 3.0ms | ActiveRecord: 1.4ms)
+
+
