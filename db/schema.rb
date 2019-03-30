@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,17 +12,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
-
-  create_table "users", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "rank"
-    t.index ["email"], name: "index_users_on_email", unique: true
+ActiveRecord::Schema.define(version: 3) do
+  create_table 'games', force: :cascade do |t|
+    t.integer 'player_id'
+    t.integer 'opponent_id'
+    t.integer 'player_score'
+    t.integer 'opponent_score'
+    t.datetime 'played_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
+  create_table 'users', force: :cascade do |t|
+    t.string 'first_name', null: false
+    t.string 'last_name', null: false
+    t.string 'email', limit: 320, null: false
+    t.string 'password_digest', limit: 60, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'rank'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+  end
 end

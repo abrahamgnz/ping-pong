@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     attributes_for(:user).slice(:first_name, :last_name, :email, :password)
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     { first_name: nil, last_name: nil, email: nil, password: nil }
-  }
+  end
 
   let(:valid_session) { {} }
 
@@ -25,11 +25,11 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new User' do
-        expect {
+        expect do
           post :create, params: {
             user: valid_attributes
           }, session: valid_session
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it 'renders a JSON response with the new user' do
@@ -64,9 +64,9 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) {
+      let(:new_attributes) do
         attributes_for(:user).slice(:first_name, :last_name, :email, :password)
-      }
+      end
 
       it 'updates the requested user' do
         subject = create(:user, valid_attributes)
