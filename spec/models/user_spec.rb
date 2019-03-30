@@ -24,6 +24,16 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'callbacks' do
+    describe 'before_validation' do
+      subject { create(:user) }
+
+      it 'it should set rank' do
+        expect(subject.rank).to be(0)
+      end
+    end
+  end
+
   context 'instance methods' do
     describe 'full_name' do
       subject { create(:user) }
