@@ -1,0 +1,2 @@
+cd <path_to_rails_app>
+0 */12 * * * bash -c 'bundle exec rake send_leaderboard_by_email:email'
