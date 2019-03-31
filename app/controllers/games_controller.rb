@@ -7,12 +7,12 @@ class GamesController < ApplicationController
   def index
     @games = Game.order(played_at: :desc).all
 
-    render json: @games
+    render json: GameSerializer.new(@games, is_collection: true).serialized_json
   end
 
   # GET /games/1
   def show
-    render json: @game
+    render json: GameSerializer.new(@game), status: :created
   end
 
   # POST /games
@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      render json: @game, status: :created, location: @game
+      render json: GameSerializer.new(@game), status: :created
     else
       render json: @game.errors, status: :unprocessable_entity
     end

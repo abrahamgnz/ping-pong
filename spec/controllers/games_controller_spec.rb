@@ -22,17 +22,21 @@ RSpec.describe GamesController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
       hash_body = JSON.parse(response.body)
-      expect(hash_body.first['id']).to match(game[:id])
+      data = hash_body['data']
+      expect(response).to be_successful
+      expect(data.first['id'].to_i).to eq(game[:id])
     end
+
     it 'returns ordered games' do
       first = create(:game, valid_attributes.merge(played_at: '2019-11-30 18:38:53'))
       second = create(:game, valid_attributes.merge(played_at: '2019-04-30 18:38:53'))
       third = create(:game, valid_attributes.merge(played_at: '2019-01-30 18:38:53'))
       get :index, params: {}, session: valid_session
       hash_body = JSON.parse(response.body)
-      expect(hash_body.first['id']).to eq(first[:id])
-      expect(hash_body.second['id']).to eq(second[:id])
-      expect(hash_body.last['id']).to eq(third[:id])
+      data = hash_body['data']
+      expect(data.first['id'].to_i).to eq(first[:id])
+      expect(data.second['id'].to_i).to eq(second[:id])
+      expect(data.last['id'].to_i).to eq(third[:id])
     end
   end
 
@@ -40,8 +44,10 @@ RSpec.describe GamesController, type: :controller do
     it 'returns a success response' do
       game = Game.create! valid_attributes
       get :show, params: { id: game.to_param }, session: valid_session
+      hash_body = JSON.parse(response.body)
+      data = hash_body['data']
       expect(response).to be_successful
-      expect(response.body).to match(game.to_json)
+      expect(data['id'].to_i).to eq(game[:id])
     end
   end
 
@@ -57,7 +63,6 @@ RSpec.describe GamesController, type: :controller do
         post :create, params: { game: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(game_url(Game.last))
       end
     end
 
