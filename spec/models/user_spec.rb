@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
       subject { create(:user) }
 
       it 'it should set rank' do
-        expect(subject.rank).to be(0)
+        expect(subject.rank).to be(1000)
       end
     end
   end

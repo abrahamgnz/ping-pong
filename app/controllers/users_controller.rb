@@ -3,6 +3,11 @@
 class UsersController < ApplicationController
   before_action :find_user, only: %i[show update destroy]
 
+  def index
+    @users = User.order(rank: :desc).all
+    render json: UserSerializer.new(@users, is_collection: true).serialized_json
+  end
+
   # GET /users/1
   def show
     render json: @user

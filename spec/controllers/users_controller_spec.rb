@@ -13,6 +13,22 @@ RSpec.describe UsersController, type: :controller do
 
   let(:valid_session) { {} }
 
+  describe 'GET #index' do
+    it 'returns a success response' do
+      first = create(:user, valid_attributes.merge(email: 'second@second.com', rank: 2000))
+
+      create(:user, valid_attributes.merge(email: 'third@second.com', rank: 1500))
+      last = create(:user, valid_attributes.merge(email: 'last@last.com', rank: 1000))
+      get :index, session: valid_session
+      expect(response).to be_successful
+      expect(response.content_type).to eq('application/json')
+      hash_body = JSON.parse(response.body)
+      data = hash_body['data']
+      expect(data[0]['id'].to_i).to eq(first[:id])
+      expect(data.last['id'].to_i).to eq(last[:id])
+    end
+  end
+
   describe 'GET #show' do
     it 'returns a success response' do
       subject = create(:user, valid_attributes)

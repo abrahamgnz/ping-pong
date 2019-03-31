@@ -30,9 +30,9 @@ RSpec.describe GamesController, type: :controller do
       third = create(:game, valid_attributes.merge(played_at: '2019-01-30 18:38:53'))
       get :index, params: {}, session: valid_session
       hash_body = JSON.parse(response.body)
-      expect(hash_body.first['id']).to match(first[:id])
-      expect(hash_body.second['id']).to match(second[:id])
-      expect(hash_body.last['id']).to match(third[:id])
+      expect(hash_body.first['id']).to eq(first[:id])
+      expect(hash_body.second['id']).to eq(second[:id])
+      expect(hash_body.last['id']).to eq(third[:id])
     end
   end
 

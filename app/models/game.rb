@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require 'elo'
+
 class Game < ApplicationRecord
+  include Elo
   # -- Constants ------------------------------------------------------------
   min_score = 0
   ERROR_MESSAGES = {
@@ -30,6 +33,7 @@ class Game < ApplicationRecord
   # -- Scopes ---------------------------------------------------------------
 
   # -- Callbacks ------------------------------------------------------------
+  after_create :update_rank
 
   # -- Class Methods --------------------------------------------------------
   #
@@ -54,5 +58,20 @@ class Game < ApplicationRecord
     end
 
     errors.add(:base, ERROR_MESSAGES[:no_winning_score]) unless winning_score?
+  end
+
+  private
+
+  def update_rank
+    @player = User.find_by id: player_id
+    @opponent = User.find_by id: opponent_id
+
+    new_ranks = calculate_new_raitings(@player.rank, @opponent.rank, player_score, opponent_score)
+
+    @player.rank = new_ranks.first
+    @opponent.rank = new_ranks.last
+
+    @player.save
+    @opponent.save
   end
 end

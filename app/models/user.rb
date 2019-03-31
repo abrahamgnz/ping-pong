@@ -32,6 +32,6 @@ class User < ApplicationRecord
   end
 
   def set_rank
-    self.rank ||= 0
+    self.rank ||= 1000
   end
 end

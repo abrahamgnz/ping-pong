@@ -56,4 +56,7 @@ RSpec.describe Game, type: :model do
       end
     end
   end
+
+  context 'Elo module' do
+  end
 end
